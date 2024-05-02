@@ -1,0 +1,41 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "loomi-chall",
+          "appId": "1:556432479913:android:5ac16253728dd10ad53bb8",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "loomi-chall",
+          "appId": "1:556432479913:ios:9c55facb9839b1b2d53bb8",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "loomi-chall",
+          "appId": "1:556432479913:ios:9c55facb9839b1b2d53bb8",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "loomi-chall",
+          "configurations": {
+            "android": "1:556432479913:android:5ac16253728dd10ad53bb8",
+            "ios": "1:556432479913:ios:9c55facb9839b1b2d53bb8",
+            "macos": "1:556432479913:ios:9c55facb9839b1b2d53bb8",
+            "web": "1:556432479913:web:d62e774d831e1008d53bb8",
+            "windows": "1:556432479913:web:8ba698509f3c237bd53bb8"
+          }
+        }
+      }
+    }
+  }
+}

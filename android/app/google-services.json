@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "556432479913",
+    "project_id": "loomi-chall",
+    "storage_bucket": "loomi-chall.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556432479913:android:5ac16253728dd10ad53bb8",
+        "android_client_info": {
+          "package_name": "com.example.loomi_flutter_chall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556432479913-3969i8403qkg8kj75i65nrfbd3gurn5l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMakt8_Xgm3WToF3twlV32RBNzJhH-H10"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556432479913-3969i8403qkg8kj75i65nrfbd3gurn5l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "556432479913-thvthodm6svd9jbr620c1jikpooglq0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.loomiFlutterChall"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
