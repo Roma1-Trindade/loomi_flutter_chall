@@ -48,20 +48,47 @@ mixin _$AuthStore on _AuthStoreBase, Store {
     });
   }
 
+  late final _$errorMessageAtom =
+      Atom(name: '_AuthStoreBase.errorMessage', context: context);
+
+  @override
+  String? get errorMessage {
+    _$errorMessageAtom.reportRead();
+    return super.errorMessage;
+  }
+
+  @override
+  set errorMessage(String? value) {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
+      super.errorMessage = value;
+    });
+  }
+
   late final _$signInAsyncAction =
       AsyncAction('_AuthStoreBase.signIn', context: context);
 
   @override
-  Future<void> signIn(String email, String password) {
-    return _$signInAsyncAction.run(() => super.signIn(email, password));
+  Future<void> signIn({required String email, required String password}) {
+    return _$signInAsyncAction
+        .run(() => super.signIn(email: email, password: password));
   }
 
   late final _$signUpAsyncAction =
       AsyncAction('_AuthStoreBase.signUp', context: context);
 
   @override
-  Future<void> signUp(String email, String password) {
-    return _$signUpAsyncAction.run(() => super.signUp(email, password));
+  Future<void> signUp({required String email, required String password}) {
+    return _$signUpAsyncAction
+        .run(() => super.signUp(email: email, password: password));
+  }
+
+  late final _$resetPasswordAsyncAction =
+      AsyncAction('_AuthStoreBase.resetPassword', context: context);
+
+  @override
+  Future<void> resetPassword({required String email}) {
+    return _$resetPasswordAsyncAction
+        .run(() => super.resetPassword(email: email));
   }
 
   late final _$signOutAsyncAction =
@@ -77,6 +104,7 @@ mixin _$AuthStore on _AuthStoreBase, Store {
     return '''
 user: ${user},
 isLoading: ${isLoading},
+errorMessage: ${errorMessage},
 isAuthenticated: ${isAuthenticated}
     ''';
   }
