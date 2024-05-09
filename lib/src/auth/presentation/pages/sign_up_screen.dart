@@ -59,7 +59,10 @@ class SignUpScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Already have an account? '),
+                      Text(
+                        'Already have an account? ',
+                        style: LoomiTextStyle.bodyText2.style,
+                      ),
                       InkWell(
                         child: Text(
                           'Sign In!',
@@ -82,12 +85,13 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   SpacingTokens.v12,
-                  const Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: SpacingTokens.s32),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: SpacingTokens.s32),
                     child: Text(
                       'To get started, please complete your account registration.',
                       textAlign: TextAlign.center,
+                      style: LoomiTextStyle.bodyText2.style,
                     ),
                   ),
                   SpacingTokens.v28,

@@ -5,7 +5,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:loomi_flutter_chall/src/auth/presentation/stores/auth_store.dart';
-import 'package:loomi_flutter_chall/src/auth/routes/sign_up_route.dart';
 import 'package:loomi_flutter_chall/src/home/home_routes.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/assets/loomi_icons.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/assets/loomi_images.dart';
@@ -277,8 +276,7 @@ class SignUpProfileScreen extends StatelessWidget {
                 LoomiButton.secondary(
                   text: 'Back',
                   onPressed: () {
-                    Navigator.of(context)
-                        .pushAndRemoveUntil(SignUpRoute(), (_) => false);
+                    Navigator.of(context).pop();
                   },
                 ),
               ],

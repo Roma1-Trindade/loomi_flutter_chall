@@ -3,7 +3,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:loomi_flutter_chall/src/auth/presentation/stores/auth_store.dart';
+import 'package:loomi_flutter_chall/src/auth/routes/forgot_password_route.dart';
 import 'package:loomi_flutter_chall/src/auth/routes/sign_up_route.dart';
+import 'package:loomi_flutter_chall/src/home/home_routes.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/assets/loomi_images.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/themes/loomi_text_style.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/tokens/color_tokens.dart';
@@ -11,6 +13,7 @@ import 'package:loomi_flutter_chall/src/shared/design_system/tokens/spacing_toke
 import 'package:loomi_flutter_chall/src/shared/design_system/tokens/typography_tokens.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/utils/validators.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/widgets/buttons/loomi_button.dart';
+import 'package:loomi_flutter_chall/src/shared/design_system/widgets/dialogs/loomi_notification.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/widgets/misc/loomi_divider.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/widgets/text_field/loomi_text_field.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/widgets/text_field/loomi_text_field_controller.dart';
@@ -22,6 +25,7 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthStore authStore = GetIt.instance<AuthStore>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     LoomiTextFieldController emailController = LoomiTextFieldController(
       null,
       validators: Validators.email,
@@ -60,17 +64,26 @@ class SignInScreen extends StatelessWidget {
                   SpacingTokens.v64,
                   Column(
                     children: [
-                      LoomiTextField(
-                        autofocus: false,
-                        controller: emailController,
-                        hintText: 'Email',
-                      ),
-                      SpacingTokens.v22,
-                      LoomiTextField(
-                        autofocus: false,
-                        controller: passwordController,
-                        hintText: 'Password',
-                        suffix: SUFFIX.Eye,
+                      Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            LoomiTextField(
+                              autofocus: false,
+                              controller: emailController,
+                              hintText: 'Email',
+                              onChanged: (String value) =>
+                                  authStore.setEmail(value),
+                            ),
+                            SpacingTokens.v22,
+                            LoomiTextField(
+                              autofocus: false,
+                              controller: passwordController,
+                              hintText: 'Password',
+                              suffix: SUFFIX.Eye,
+                            ),
+                          ],
+                        ),
                       ),
                       SpacingTokens.v22,
                       Row(
@@ -85,7 +98,7 @@ class SignInScreen extends StatelessWidget {
                               ),
                             ),
                             onTap: () {
-                              // Navigator.of(context).push(ForgotPasswordRoute());
+                              Navigator.of(context).push(ForgotPasswordRoute());
                             },
                           ),
                         ],
@@ -94,7 +107,28 @@ class SignInScreen extends StatelessWidget {
                       LoomiButton.primary(
                         isLoading: authStore.isLoading,
                         text: 'Login',
-                        onPressed: () {},
+                        onPressed: () async {
+                          if (emailController.isValid &&
+                              passwordController.isValid) {
+                            await authStore.signIn(
+                                email: emailController.text,
+                                password: passwordController.text);
+                            if (authStore.isSuccess) {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                HomeRoute(),
+                                (_) => false,
+                              );
+                            }
+                            if (authStore.isFailure) {
+                              passwordController.clear();
+                              LoomiNotification.showNotification(
+                                  'SignIn error!', authStore.errorMessage!);
+                            }
+                          } else {
+                            emailController.showValidationState();
+                            passwordController.showValidationState();
+                          }
+                        },
                       ),
                       SpacingTokens.v46,
                       const LoomiDivider(title: 'Or Sign in With'),
@@ -124,6 +158,7 @@ class SignInScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SpacingTokens.v24,
                 ],
               ),
             ),
