@@ -11,7 +11,7 @@ class LoomiTextStyle {
       fontFamily: LoomiTypographyTokens.EpilogueFamily,
       fontSize: FontSizeTokens.tera,
       fontWeight: FontWeightTokens.bold,
-      letterSpacing: LetterSpacingTokens.deka,
+      letterSpacing: LetterSpacingTokens.zetta,
     ),
   );
   static LoomiTextStyle extraBold = const LoomiTextStyle._(

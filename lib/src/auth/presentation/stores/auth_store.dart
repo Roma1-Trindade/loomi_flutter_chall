@@ -133,6 +133,7 @@ abstract class _AuthStoreBase with Store {
       isFailure = false;
       errorMessage = '';
       await _authRepository.resetPassword(email: email);
+      isSuccess = true;
     } catch (e) {
       e as FirebaseAuthException;
       isFailure = true;
