@@ -137,6 +137,14 @@ mixin _$AuthStore on _AuthStoreBase, Store {
         .run(() => super.signIn(email: email, password: password));
   }
 
+  late final _$signInWithGoogleAsyncAction =
+      AsyncAction('_AuthStoreBase.signInWithGoogle', context: context);
+
+  @override
+  Future<void> signInWithGoogle() {
+    return _$signInWithGoogleAsyncAction.run(() => super.signInWithGoogle());
+  }
+
   late final _$signUpAsyncAction =
       AsyncAction('_AuthStoreBase.signUp', context: context);
 

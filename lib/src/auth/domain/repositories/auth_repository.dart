@@ -5,6 +5,7 @@ abstract class AuthRepository {
     required String email,
     required String password,
   });
+  Future<User?> signInWithGoogle();
   Future<User?> signUpWithEmailAndPassword({
     required String email,
     required String password,

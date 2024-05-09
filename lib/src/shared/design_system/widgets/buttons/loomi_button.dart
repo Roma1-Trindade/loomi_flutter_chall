@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/themes/loomi_button_color.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/themes/loomi_text_style.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/tokens/color_tokens.dart';

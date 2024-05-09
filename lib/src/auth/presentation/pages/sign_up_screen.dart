@@ -92,7 +92,6 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   SpacingTokens.v28,
                   LoomiSocialButtons(
-                    onGooglePressed: () {},
                     onApplePressed: () {},
                   ),
                   SpacingTokens.v40,

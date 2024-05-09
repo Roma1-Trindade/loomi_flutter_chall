@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "556432479913-0u4jrjoaisteja13is14oottjmmtoq8h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.loomi_flutter_chall",
+            "certificate_hash": "eee1a2fc1af51dff03be8be4224de563273ec2d6"
+          }
+        },
+        {
           "client_id": "556432479913-3969i8403qkg8kj75i65nrfbd3gurn5l.apps.googleusercontent.com",
           "client_type": 3
         }

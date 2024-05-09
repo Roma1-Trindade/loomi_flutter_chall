@@ -67,6 +67,27 @@ abstract class _AuthStoreBase with Store {
   }
 
   @action
+  Future<void> signInWithGoogle() async {
+    try {
+      isLoading = true;
+      isSuccess = false;
+      isFailure = false;
+      errorMessage = '';
+      user = await _authRepository.signInWithGoogle();
+      if (user != null) {
+        isSuccess = true;
+        errorMessage = '';
+      }
+    } catch (e) {
+      isFailure = true;
+      errorMessage = e.toString();
+      print('[error]: $e');
+    } finally {
+      isLoading = false;
+    }
+  }
+
+  @action
   Future<void> signUp({
     required String email,
     required String password,
