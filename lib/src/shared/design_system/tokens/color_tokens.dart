@@ -7,9 +7,12 @@ class ColorTokens {
   static const Color darkGray = Color(0xFF555252);
   static const Color gray = Color.fromRGBO(168, 69, 82, 0.2);
   static const Color white = Color(0xFFFFFFFF);
+  static const Color offWhite = Color(0xFFDEDEDE);
+  static const Color white_10 = Color.fromRGBO(187, 187, 187, 0.1);
   static const Color white_20 = Color.fromRGBO(244, 244, 244, 0.2);
   static const Color white_33 = Color.fromRGBO(255, 255, 255, 0.33);
   static const Color white_45 = Color.fromRGBO(255, 255, 255, 0.45);
+  static const Color white_60 = Color.fromRGBO(215, 215, 215, 0.6);
   static const Color purple = Color(0xFFAA73F0);
   static const Color purple_20 = Color.fromRGBO(188, 76, 241, 0.2);
   static const Color supportDangerMain = Color(0xFFFF5151);

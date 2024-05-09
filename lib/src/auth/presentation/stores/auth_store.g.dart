@@ -32,6 +32,38 @@ mixin _$AuthStore on _AuthStoreBase, Store {
     });
   }
 
+  late final _$emailTextAtom =
+      Atom(name: '_AuthStoreBase.emailText', context: context);
+
+  @override
+  String? get emailText {
+    _$emailTextAtom.reportRead();
+    return super.emailText;
+  }
+
+  @override
+  set emailText(String? value) {
+    _$emailTextAtom.reportWrite(value, super.emailText, () {
+      super.emailText = value;
+    });
+  }
+
+  late final _$passwordTextAtom =
+      Atom(name: '_AuthStoreBase.passwordText', context: context);
+
+  @override
+  String? get passwordText {
+    _$passwordTextAtom.reportRead();
+    return super.passwordText;
+  }
+
+  @override
+  set passwordText(String? value) {
+    _$passwordTextAtom.reportWrite(value, super.passwordText, () {
+      super.passwordText = value;
+    });
+  }
+
   late final _$isLoadingAtom =
       Atom(name: '_AuthStoreBase.isLoading', context: context);
 
@@ -45,6 +77,38 @@ mixin _$AuthStore on _AuthStoreBase, Store {
   set isLoading(bool value) {
     _$isLoadingAtom.reportWrite(value, super.isLoading, () {
       super.isLoading = value;
+    });
+  }
+
+  late final _$isSuccessAtom =
+      Atom(name: '_AuthStoreBase.isSuccess', context: context);
+
+  @override
+  bool get isSuccess {
+    _$isSuccessAtom.reportRead();
+    return super.isSuccess;
+  }
+
+  @override
+  set isSuccess(bool value) {
+    _$isSuccessAtom.reportWrite(value, super.isSuccess, () {
+      super.isSuccess = value;
+    });
+  }
+
+  late final _$isFailureAtom =
+      Atom(name: '_AuthStoreBase.isFailure', context: context);
+
+  @override
+  bool get isFailure {
+    _$isFailureAtom.reportRead();
+    return super.isFailure;
+  }
+
+  @override
+  set isFailure(bool value) {
+    _$isFailureAtom.reportWrite(value, super.isFailure, () {
+      super.isFailure = value;
     });
   }
 
@@ -77,9 +141,10 @@ mixin _$AuthStore on _AuthStoreBase, Store {
       AsyncAction('_AuthStoreBase.signUp', context: context);
 
   @override
-  Future<void> signUp({required String email, required String password}) {
+  Future<void> signUp(
+      {required String email, required String password, required String name}) {
     return _$signUpAsyncAction
-        .run(() => super.signUp(email: email, password: password));
+        .run(() => super.signUp(email: email, password: password, name: name));
   }
 
   late final _$resetPasswordAsyncAction =
@@ -99,11 +164,40 @@ mixin _$AuthStore on _AuthStoreBase, Store {
     return _$signOutAsyncAction.run(() => super.signOut());
   }
 
+  late final _$_AuthStoreBaseActionController =
+      ActionController(name: '_AuthStoreBase', context: context);
+
+  @override
+  String setEmail(String email) {
+    final _$actionInfo = _$_AuthStoreBaseActionController.startAction(
+        name: '_AuthStoreBase.setEmail');
+    try {
+      return super.setEmail(email);
+    } finally {
+      _$_AuthStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  String setPassword(String password) {
+    final _$actionInfo = _$_AuthStoreBaseActionController.startAction(
+        name: '_AuthStoreBase.setPassword');
+    try {
+      return super.setPassword(password);
+    } finally {
+      _$_AuthStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 user: ${user},
+emailText: ${emailText},
+passwordText: ${passwordText},
 isLoading: ${isLoading},
+isSuccess: ${isSuccess},
+isFailure: ${isFailure},
 errorMessage: ${errorMessage},
 isAuthenticated: ${isAuthenticated}
     ''';

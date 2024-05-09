@@ -1,16 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:loomi_flutter_chall/src/auth/presentation/pages/sign_up_screen.dart';
+import 'package:loomi_flutter_chall/src/shared/design_system/widgets/misc/loomi_page_router.dart';
 
-class SignUpRoute extends PageRouteBuilder {
-  SignUpRoute()
-      : super(
-          transitionDuration: const Duration(milliseconds: 500),
-          pageBuilder: (_, __, ___) => const SignUpScreen(),
-          transitionsBuilder: (_, animation, __, child) {
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
-        );
+class SignUpRoute extends LoomiPageRoute {
+  SignUpRoute() : super(page: const SignUpScreen());
 }

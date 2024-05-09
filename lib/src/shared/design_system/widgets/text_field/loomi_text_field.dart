@@ -197,6 +197,9 @@ class _LoomiTextFieldState extends State<LoomiTextField> {
                     suffixIcon: suffix,
                   )
                 : null,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: ColorTokens.white,
+                ),
           ),
         );
       },

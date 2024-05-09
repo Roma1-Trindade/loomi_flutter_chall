@@ -16,11 +16,11 @@ class LoomiTextFieldColor {
   final Color errorBorder;
   static const regular = LoomiTextFieldColor(
     placeholder: ColorTokens.lightGray,
-    text: ColorTokens.white_45,
+    text: ColorTokens.white,
     prefix: ColorTokens.white_45,
     hintText: ColorTokens.white_45,
-    focusedText: ColorTokens.white_45,
-    unfocusedText: ColorTokens.white_45,
+    focusedText: ColorTokens.white,
+    unfocusedText: ColorTokens.white,
     errorText: ColorTokens.supportDangerMain,
     errorBorder: ColorTokens.supportDangerMain,
     border: ColorTokens.lightGray,
