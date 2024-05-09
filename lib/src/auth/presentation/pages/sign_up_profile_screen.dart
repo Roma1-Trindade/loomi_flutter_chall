@@ -112,69 +112,82 @@ class SignUpProfileScreen extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                color: ColorTokens.purple_20,
-                                                borderRadius:
-                                                    BorderRadius.circular(34),
-                                                border: Border.all(
-                                                    color: ColorTokens.purple)),
-                                            constraints: const BoxConstraints(
-                                              minHeight: 140,
-                                              minWidth: 135,
-                                            ),
-                                            child: const Center(
-                                              child: Column(
-                                                children: [
-                                                  Icon(
-                                                    LoomiIcons.camera,
-                                                    color: ColorTokens.purple,
-                                                  ),
-                                                  SpacingTokens.v10,
-                                                  SizedBox(
-                                                    width: SpacingTokens.s54,
-                                                    child: Text(
-                                                      'Take a photo',
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      softWrap: true,
+                                          InkWell(
+                                            borderRadius:
+                                                BorderRadius.circular(34),
+                                            onTap: () {},
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: ColorTokens.purple_20,
+                                                  borderRadius:
+                                                      BorderRadius.circular(34),
+                                                  border: Border.all(
+                                                      color:
+                                                          ColorTokens.purple)),
+                                              constraints: const BoxConstraints(
+                                                minHeight: 140,
+                                                minWidth: 135,
+                                              ),
+                                              child: const Center(
+                                                child: Column(
+                                                  children: [
+                                                    Icon(
+                                                      LoomiIcons.camera,
+                                                      color: ColorTokens.purple,
                                                     ),
-                                                  ),
-                                                ],
+                                                    SpacingTokens.v10,
+                                                    SizedBox(
+                                                      width: SpacingTokens.s54,
+                                                      child: Text(
+                                                        'Take a photo',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        softWrap: true,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
                                           SpacingTokens.h20,
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                color: ColorTokens.white_10,
-                                                borderRadius:
-                                                    BorderRadius.circular(34),
-                                                border: Border.all(
-                                                    color:
-                                                        ColorTokens.white_60)),
-                                            constraints: const BoxConstraints(
-                                              minHeight: 140,
-                                              minWidth: 135,
-                                            ),
-                                            child: const Center(
-                                              child: Column(
-                                                children: [
-                                                  Icon(
-                                                    Icons.insert_photo_outlined,
-                                                    color: ColorTokens.offWhite,
-                                                  ),
-                                                  SpacingTokens.v10,
-                                                  SizedBox(
-                                                    width: 100,
-                                                    child: Text(
-                                                      'Choose from gallery',
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      softWrap: true,
+                                          InkWell(
+                                            borderRadius:
+                                                BorderRadius.circular(34),
+                                            onTap: () {},
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: ColorTokens.white_10,
+                                                  borderRadius:
+                                                      BorderRadius.circular(34),
+                                                  border: Border.all(
+                                                      color: ColorTokens
+                                                          .white_60)),
+                                              constraints: const BoxConstraints(
+                                                minHeight: 140,
+                                                minWidth: 135,
+                                              ),
+                                              child: const Center(
+                                                child: Column(
+                                                  children: [
+                                                    Icon(
+                                                      Icons
+                                                          .insert_photo_outlined,
+                                                      color:
+                                                          ColorTokens.offWhite,
                                                     ),
-                                                  ),
-                                                ],
+                                                    SpacingTokens.v10,
+                                                    SizedBox(
+                                                      width: 100,
+                                                      child: Text(
+                                                        'Choose from gallery',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        softWrap: true,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -263,10 +276,9 @@ class SignUpProfileScreen extends StatelessWidget {
                 SpacingTokens.v16,
                 LoomiButton.secondary(
                   text: 'Back',
-                  hasBorder: false,
-                  hasShadow: false,
                   onPressed: () {
-                    Navigator.of(context).push(SignUpRoute());
+                    Navigator.of(context)
+                        .pushAndRemoveUntil(SignUpRoute(), (_) => false);
                   },
                 ),
               ],
