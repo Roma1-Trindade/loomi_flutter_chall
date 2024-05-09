@@ -100,7 +100,6 @@ class SignInScreen extends StatelessWidget {
                       const LoomiDivider(title: 'Or Sign in With'),
                       SpacingTokens.v28,
                       LoomiSocialButtons(
-                        onGooglePressed: () {},
                         onApplePressed: () {},
                       ),
                       SpacingTokens.v28,
