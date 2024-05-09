@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:loomi_flutter_chall/src/auth/presentation/stores/auth_store.dart';
+import 'package:loomi_flutter_chall/src/auth/routes/sign_in_route.dart';
 import 'package:loomi_flutter_chall/src/auth/routes/sign_up_profile_route.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/assets/loomi_images.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/themes/loomi_text_style.dart';
@@ -15,6 +16,7 @@ import 'package:loomi_flutter_chall/src/shared/design_system/widgets/buttons/loo
 import 'package:loomi_flutter_chall/src/shared/design_system/widgets/misc/loomi_divider.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/widgets/text_field/loomi_text_field.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/widgets/text_field/loomi_text_field_controller.dart';
+import 'package:loomi_flutter_chall/src/shared/presentation/widgets/loomi_social_buttons.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -41,12 +43,15 @@ class SignUpScreen extends StatelessWidget {
       builder: (_) => Scaffold(
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
+          reverse: true,
           child: Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: SpacingTokens.s16, vertical: SpacingTokens.s54),
+              horizontal: SpacingTokens.s16,
+            ),
             child: Center(
               child: Column(
                 children: [
+                  SpacingTokens.v24,
                   SvgPicture.asset(
                     LoomiImages.loginLogo,
                   ),
@@ -55,7 +60,7 @@ class SignUpScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text('Already have an account? '),
-                      GestureDetector(
+                      InkWell(
                         child: Text(
                           'Sign In!',
                           style: LoomiTextStyle.subtitle1.style.copyWith(
@@ -64,7 +69,7 @@ class SignUpScreen extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          print('SignIn Pressed!');
+                          Navigator.of(context).push(SignInRoute());
                         },
                       ),
                     ],
@@ -86,81 +91,49 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   SpacingTokens.v28,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: ColorTokens.purple_20,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        constraints: const BoxConstraints(
-                          minHeight: 70,
-                          minWidth: 70,
-                        ),
-                        child: SvgPicture.asset(
-                          LoomiImages.googleLogo,
-                          fit: BoxFit.none,
-                        ),
-                      ),
-                      SpacingTokens.h16,
-                      Container(
-                        decoration: BoxDecoration(
-                          color: ColorTokens.white_33,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        constraints: const BoxConstraints(
-                          minHeight: 70,
-                          minWidth: 70,
-                        ),
-                        child: SvgPicture.asset(
-                          LoomiImages.appleLogo,
-                          fit: BoxFit.none,
-                        ),
-                      ),
-                    ],
+                  LoomiSocialButtons(
+                    onGooglePressed: () {},
+                    onApplePressed: () {},
                   ),
                   SpacingTokens.v40,
                   const LoomiDivider(
                     title: 'Or Sign up With',
                   ),
                   SpacingTokens.v40,
-                  Observer(builder: (_) {
-                    return Form(
-                      key: formKey,
-                      child: Column(
-                        children: [
-                          LoomiTextField(
-                            autofocus: false,
-                            controller: emailController,
-                            hintText: 'Email',
-                            onChanged: (String value) {
-                              authStore.setEmail(value);
-                            },
-                          ),
-                          SpacingTokens.v22,
-                          LoomiTextField(
-                            autofocus: false,
-                            controller: passwordController,
-                            hintText: 'Password',
-                            suffix: SUFFIX.Eye,
-                            onChanged: (String value) {
-                              confirmPasswordController
-                                  .updateValueToCompareWith(value);
-                              authStore.setPassword(value);
-                            },
-                          ),
-                          SpacingTokens.v22,
-                          LoomiTextField(
-                            autofocus: false,
-                            controller: confirmPasswordController,
-                            hintText: 'Confirm your Password',
-                            suffix: SUFFIX.Eye,
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
+                  Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        LoomiTextField(
+                          autofocus: false,
+                          controller: emailController,
+                          hintText: 'Email',
+                          onChanged: (String value) {
+                            authStore.setEmail(value);
+                          },
+                        ),
+                        SpacingTokens.v22,
+                        LoomiTextField(
+                          autofocus: false,
+                          controller: passwordController,
+                          hintText: 'Password',
+                          suffix: SUFFIX.Eye,
+                          onChanged: (String value) {
+                            confirmPasswordController
+                                .updateValueToCompareWith(value);
+                            authStore.setPassword(value);
+                          },
+                        ),
+                        SpacingTokens.v22,
+                        LoomiTextField(
+                          autofocus: false,
+                          controller: confirmPasswordController,
+                          hintText: 'Confirm your Password',
+                          suffix: SUFFIX.Eye,
+                        ),
+                      ],
+                    ),
+                  ),
                   SpacingTokens.v22,
                   LoomiButton.primary(
                     isLoading: authStore.isLoading,
@@ -176,7 +149,8 @@ class SignUpScreen extends StatelessWidget {
                       }
                     },
                     text: 'Create account',
-                  )
+                  ),
+                  SpacingTokens.v24
                 ],
               ),
             ),

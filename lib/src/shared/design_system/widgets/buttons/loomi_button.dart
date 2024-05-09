@@ -81,8 +81,8 @@ class LoomiButton extends StatelessWidget {
     Color? textColor,
     EdgeInsets? padding,
     TextStyle? textStyle,
-    bool hasBorder = true,
-    bool hasShadow = true,
+    bool hasBorder = false,
+    bool hasShadow = false,
   }) =>
       LoomiButton._(
         key: key,
@@ -109,6 +109,16 @@ class LoomiButton extends StatelessWidget {
                 color: ColorTokens.purple,
                 width: 1,
               )
+            : null,
+        boxShadow: hasShadow
+            ? const [
+                BoxShadow(
+                  color: ColorTokens.shadow,
+                  // spreadRadius: 8,
+                  blurStyle: BlurStyle.outer,
+                  blurRadius: 18,
+                )
+              ]
             : null,
         borderRadius: BorderRadius.circular(7),
       ),
