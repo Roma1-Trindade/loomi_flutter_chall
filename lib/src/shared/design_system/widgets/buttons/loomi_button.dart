@@ -81,6 +81,8 @@ class LoomiButton extends StatelessWidget {
     Color? textColor,
     EdgeInsets? padding,
     TextStyle? textStyle,
+    bool hasBorder = true,
+    bool hasShadow = true,
   }) =>
       LoomiButton._(
         key: key,
@@ -93,6 +95,8 @@ class LoomiButton extends StatelessWidget {
         iconAffinity: iconAffinity,
         padding: padding,
         textStyle: textStyle,
+        hasBorder: hasBorder,
+        hasShadow: hasShadow,
       );
 
   @override

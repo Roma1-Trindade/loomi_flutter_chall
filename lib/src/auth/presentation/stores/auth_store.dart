@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:loomi_flutter_chall/src/auth/domain/repositories/auth_repository.dart';
-import 'package:loomi_flutter_chall/src/shared/design_system/widgets/dialogs/loomi_notification.dart';
 import 'package:mobx/mobx.dart';
 
 part 'auth_store.g.dart';
@@ -20,38 +19,86 @@ abstract class _AuthStoreBase with Store {
   User? user;
 
   @observable
+  String? emailText;
+
+  @observable
+  String? passwordText;
+
+  @observable
   bool isLoading = false;
+
+  @observable
+  bool isSuccess = false;
+
+  @observable
+  bool isFailure = false;
 
   @observable
   String? errorMessage = '';
 
   @action
+  String setEmail(String email) => emailText = email;
+
+  @action
+  String setPassword(String password) => passwordText = password;
+
+  @action
   Future<void> signIn({required String email, required String password}) async {
     try {
       isLoading = true;
+      isSuccess = false;
+      isFailure = false;
+      errorMessage = '';
       user = await _authRepository.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      if (user != null) {
+        isSuccess = true;
+        errorMessage = '';
+      }
     } catch (e) {
-      errorMessage = e.toString();
-      LoomiNotification.showNotification('SignIn error!', e.toString());
+      e as FirebaseAuthException;
+      isFailure = true;
+      errorMessage = e.message;
     } finally {
       isLoading = false;
     }
   }
 
   @action
-  Future<void> signUp({required String email, required String password}) async {
+  Future<void> signUp({
+    required String email,
+    required String password,
+    required String name,
+  }) async {
     try {
       isLoading = true;
+      isSuccess = false;
+      isFailure = false;
+      errorMessage = '';
       user = await _authRepository.signUpWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      if (user != null) {
+        try {
+          await user?.updateDisplayName(name);
+          isSuccess = true;
+          errorMessage = '';
+        } catch (e) {
+          e as FirebaseAuthException;
+          isFailure = true;
+          errorMessage = e.message;
+        }
+      } else {
+        isFailure = true;
+      }
     } catch (e) {
-      errorMessage = e.toString();
-      LoomiNotification.showNotification('SignUp error!', e.toString());
+      e as FirebaseAuthException;
+      isFailure = true;
+      errorMessage = e.message;
     } finally {
       isLoading = false;
     }
@@ -61,10 +108,14 @@ abstract class _AuthStoreBase with Store {
   Future<void> resetPassword({required String email}) async {
     try {
       isLoading = true;
+      isSuccess = false;
+      isFailure = false;
+      errorMessage = '';
       await _authRepository.resetPassword(email: email);
     } catch (e) {
-      errorMessage = e.toString();
-      LoomiNotification.showNotification('SignUp error!', e.toString());
+      e as FirebaseAuthException;
+      isFailure = true;
+      errorMessage = e.message;
     } finally {
       isLoading = false;
     }
@@ -74,8 +125,16 @@ abstract class _AuthStoreBase with Store {
   Future<void> signOut() async {
     try {
       isLoading = true;
+      isSuccess = false;
+      isFailure = false;
+      errorMessage = '';
       await _authRepository.signOut();
       user = null;
+      isSuccess = true;
+    } catch (e) {
+      e as FirebaseAuthException;
+      isFailure = true;
+      errorMessage = e.message;
     } finally {
       isLoading = false;
     }

@@ -6,6 +6,21 @@ class LoomiTextStyle {
   final TextStyle style;
   const LoomiTextStyle._(this.style);
 
+  static LoomiTextStyle h1 = const LoomiTextStyle._(
+    TextStyle(
+      fontFamily: LoomiTypographyTokens.EpilogueFamily,
+      fontSize: FontSizeTokens.tera,
+      fontWeight: FontWeightTokens.bold,
+      letterSpacing: LetterSpacingTokens.deka,
+    ),
+  );
+  static LoomiTextStyle extraBold = const LoomiTextStyle._(
+    TextStyle(
+      fontFamily: LoomiTypographyTokens.EpilogueFamily,
+      fontSize: FontSizeTokens.hecto,
+      fontWeight: FontWeightTokens.extraBold,
+    ),
+  );
   static LoomiTextStyle headline1 = const LoomiTextStyle._(
     TextStyle(
       fontFamily: LoomiTypographyTokens.EpilogueFamily,

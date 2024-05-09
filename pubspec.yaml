@@ -55,5 +55,9 @@ flutter:
         - asset: assets/fonts/Epilogue-Italic-VariableFont_wght.ttf
         - asset: assets/fonts/Epilogue-VariableFont_wght.ttf
 
+    - family: LoomiIcons
+      fonts:
+        - asset: assets/fonts/LoomiIcons.ttf
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

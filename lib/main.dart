@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:loomi_flutter_chall/loomi.dart';
-import 'package:loomi_flutter_chall/src/auth/auth_provider.dart';
+import 'package:loomi_flutter_chall/provider.dart';
 import 'firebase_options.dart';
 
 void main() async {

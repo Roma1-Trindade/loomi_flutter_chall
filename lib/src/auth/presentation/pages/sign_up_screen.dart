@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:loomi_flutter_chall/src/auth/presentation/stores/auth_store.dart';
+import 'package:loomi_flutter_chall/src/auth/routes/sign_up_profile_route.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/assets/loomi_images.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/themes/loomi_text_style.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/tokens/color_tokens.dart';
@@ -11,7 +12,6 @@ import 'package:loomi_flutter_chall/src/shared/design_system/tokens/spacing_toke
 import 'package:loomi_flutter_chall/src/shared/design_system/tokens/typography_tokens.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/utils/validators.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/widgets/buttons/loomi_button.dart';
-import 'package:loomi_flutter_chall/src/shared/design_system/widgets/dialogs/loomi_notification.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/widgets/misc/loomi_divider.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/widgets/text_field/loomi_text_field.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/widgets/text_field/loomi_text_field_controller.dart';
@@ -23,22 +23,23 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthStore authStore = GetIt.instance<AuthStore>();
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    final LoomiTextFieldController emailController = LoomiTextFieldController(
-      null,
+    LoomiTextFieldController emailController = LoomiTextFieldController(
+      authStore.emailText,
       validators: Validators.email,
     );
     LoomiTextFieldController passwordController = LoomiTextFieldController(
-      null,
+      authStore.passwordText,
       validators: Validators.password,
     );
     LoomiTextFieldController confirmPasswordController =
         LoomiTextFieldController(
-      null,
+      authStore.passwordText,
       validators: Validators.password,
     );
 
     return Observer(
       builder: (_) => Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(
@@ -71,8 +72,7 @@ class SignUpScreen extends StatelessWidget {
                   SpacingTokens.v32,
                   Text(
                     'Create an account',
-                    style: LoomiTextStyle.headline6.style.copyWith(
-                      fontWeight: FontWeightTokens.bold,
+                    style: LoomiTextStyle.h1.style.copyWith(
                       color: ColorTokens.white,
                     ),
                   ),
@@ -131,21 +131,28 @@ class SignUpScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           LoomiTextField(
+                            autofocus: false,
                             controller: emailController,
                             hintText: 'Email',
+                            onChanged: (String value) {
+                              authStore.setEmail(value);
+                            },
                           ),
                           SpacingTokens.v22,
                           LoomiTextField(
+                            autofocus: false,
                             controller: passwordController,
                             hintText: 'Password',
                             suffix: SUFFIX.Eye,
                             onChanged: (String value) {
                               confirmPasswordController
                                   .updateValueToCompareWith(value);
+                              authStore.setPassword(value);
                             },
                           ),
                           SpacingTokens.v22,
                           LoomiTextField(
+                            autofocus: false,
                             controller: confirmPasswordController,
                             hintText: 'Confirm your Password',
                             suffix: SUFFIX.Eye,
@@ -157,21 +164,16 @@ class SignUpScreen extends StatelessWidget {
                   SpacingTokens.v22,
                   LoomiButton.primary(
                     isLoading: authStore.isLoading,
-                    onPressed: () async {
+                    onPressed: () {
                       if (emailController.isValid &&
                           passwordController.isValid &&
                           confirmPasswordController.isValid) {
-                        await authStore.signUp(
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
+                        Navigator.of(context).push(SignUpProfileRoute());
                       } else {
                         emailController.showValidationState();
                         passwordController.showValidationState();
                         confirmPasswordController.showValidationState();
                       }
-
-                      LoomiNotification.showNotification('title', 'error');
                     },
                     text: 'Create account',
                   )

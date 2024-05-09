@@ -78,7 +78,7 @@ class LoomiTextFieldController extends TextEditingController {
     _subject.add(_subject.value.copyWith(compareWith: value));
   }
 
-  void updateValidators(List<String? Function(String)> newValidators) {
+  updateValidators(List<String? Function(String)> newValidators) {
     validators = newValidators;
   }
 
