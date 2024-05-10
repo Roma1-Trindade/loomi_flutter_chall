@@ -21,6 +21,8 @@ class ColorTokens {
   static const Color borderShadow = Color.fromRGBO(146, 146, 146, 0.15);
   static const Color shadow = Color.fromRGBO(241, 204, 76, 0.2);
   static const Color popOver = Color.fromRGBO(26, 26, 32, 0.8);
+  static const Color tileButtonGray = Color.fromRGBO(51, 51, 63, 0.9);
+  static const Color darkDivider = Color.fromRGBO(108, 109, 122, 0.2);
 
   static const LinearGradient cardLinearGradientHorizontal = LinearGradient(
     begin: Alignment.topLeft,

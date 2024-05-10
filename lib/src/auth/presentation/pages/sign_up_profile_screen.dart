@@ -13,6 +13,7 @@ import 'package:loomi_flutter_chall/src/shared/design_system/tokens/color_tokens
 import 'package:loomi_flutter_chall/src/shared/design_system/tokens/spacing_tokens.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/utils/validators.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/widgets/buttons/loomi_button.dart';
+import 'package:loomi_flutter_chall/src/shared/design_system/widgets/dialogs/loomi_modal_bottom_sheet.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/widgets/dialogs/loomi_notification.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/widgets/text_field/loomi_text_field.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/widgets/text_field/loomi_text_field_controller.dart';
@@ -23,6 +24,7 @@ class SignUpProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthStore authStore = GetIt.I<AuthStore>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     LoomiTextFieldController nameController = LoomiTextFieldController(
       authStore.user?.displayName,
       validators: Validators.required,
@@ -60,8 +62,8 @@ class SignUpProfileScreen extends StatelessWidget {
                     children: [
                       InkWell(
                         borderRadius: BorderRadius.circular(34),
-                        onTap: () {
-                          showModalBottomSheet(
+                        onTap: () async {
+                          await showModalBottomSheet(
                             context: context,
                             backgroundColor: ColorTokens.black,
                             shape: const RoundedRectangleBorder(
@@ -71,130 +73,89 @@ class SignUpProfileScreen extends StatelessWidget {
                               ),
                             ),
                             builder: (BuildContext context) {
-                              return SizedBox(
+                              return LoomiModalBottomSheet(
                                 height: 250,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: SpacingTokens.s40,
-                                    vertical: SpacingTokens.s30,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
+                                title: 'CHOOSE IMAGE',
+                                children: [
+                                  SpacingTokens.v26,
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Stack(
-                                        alignment: Alignment.centerLeft,
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: const Icon(
-                                              Icons.arrow_back_ios,
-                                              color: ColorTokens.purple,
+                                      InkWell(
+                                        borderRadius: BorderRadius.circular(34),
+                                        onTap: () {},
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: ColorTokens.purple_20,
+                                              borderRadius:
+                                                  BorderRadius.circular(34),
+                                              border: Border.all(
+                                                  color: ColorTokens.purple)),
+                                          constraints: const BoxConstraints(
+                                            minHeight: 140,
+                                            minWidth: 135,
+                                          ),
+                                          child: const Center(
+                                            child: Column(
+                                              children: [
+                                                Icon(
+                                                  LoomiIcons.camera,
+                                                  color: ColorTokens.purple,
+                                                ),
+                                                SpacingTokens.v10,
+                                                SizedBox(
+                                                  width: SpacingTokens.s54,
+                                                  child: Text(
+                                                    'Take a photo',
+                                                    textAlign: TextAlign.center,
+                                                    softWrap: true,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          Center(
-                                            child: Text(
-                                              'Choose Image'.toUpperCase(),
-                                              style: LoomiTextStyle
-                                                  .extraBold.style
-                                                  .copyWith(
-                                                color: ColorTokens.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                        ),
                                       ),
-                                      SpacingTokens.v26,
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          InkWell(
-                                            borderRadius:
-                                                BorderRadius.circular(34),
-                                            onTap: () {},
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  color: ColorTokens.purple_20,
-                                                  borderRadius:
-                                                      BorderRadius.circular(34),
-                                                  border: Border.all(
-                                                      color:
-                                                          ColorTokens.purple)),
-                                              constraints: const BoxConstraints(
-                                                minHeight: 140,
-                                                minWidth: 135,
-                                              ),
-                                              child: const Center(
-                                                child: Column(
-                                                  children: [
-                                                    Icon(
-                                                      LoomiIcons.camera,
-                                                      color: ColorTokens.purple,
-                                                    ),
-                                                    SpacingTokens.v10,
-                                                    SizedBox(
-                                                      width: SpacingTokens.s54,
-                                                      child: Text(
-                                                        'Take a photo',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        softWrap: true,
-                                                      ),
-                                                    ),
-                                                  ],
+                                      SpacingTokens.h20,
+                                      InkWell(
+                                        borderRadius: BorderRadius.circular(34),
+                                        onTap: () {},
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: ColorTokens.white_10,
+                                              borderRadius:
+                                                  BorderRadius.circular(34),
+                                              border: Border.all(
+                                                  color: ColorTokens.white_60)),
+                                          constraints: const BoxConstraints(
+                                            minHeight: 140,
+                                            minWidth: 135,
+                                          ),
+                                          child: const Center(
+                                            child: Column(
+                                              children: [
+                                                Icon(
+                                                  Icons.insert_photo_outlined,
+                                                  color: ColorTokens.offWhite,
                                                 ),
-                                              ),
+                                                SpacingTokens.v10,
+                                                SizedBox(
+                                                  width: 100,
+                                                  child: Text(
+                                                    'Choose from gallery',
+                                                    textAlign: TextAlign.center,
+                                                    softWrap: true,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          SpacingTokens.h20,
-                                          InkWell(
-                                            borderRadius:
-                                                BorderRadius.circular(34),
-                                            onTap: () {},
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  color: ColorTokens.white_10,
-                                                  borderRadius:
-                                                      BorderRadius.circular(34),
-                                                  border: Border.all(
-                                                      color: ColorTokens
-                                                          .white_60)),
-                                              constraints: const BoxConstraints(
-                                                minHeight: 140,
-                                                minWidth: 135,
-                                              ),
-                                              child: const Center(
-                                                child: Column(
-                                                  children: [
-                                                    Icon(
-                                                      Icons
-                                                          .insert_photo_outlined,
-                                                      color:
-                                                          ColorTokens.offWhite,
-                                                    ),
-                                                    SpacingTokens.v10,
-                                                    SizedBox(
-                                                      width: 100,
-                                                      child: Text(
-                                                        'Choose from gallery',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        softWrap: true,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                        ),
                                       ),
                                     ],
                                   ),
-                                ),
+                                ],
                               );
                             },
                           );
@@ -241,9 +202,12 @@ class SignUpProfileScreen extends StatelessWidget {
                   ),
                 ),
                 SpacingTokens.v64,
-                LoomiTextField(
-                  controller: nameController,
-                  hintText: 'Your name',
+                Form(
+                  key: formKey,
+                  child: LoomiTextField(
+                    controller: nameController,
+                    hintText: 'Your name',
+                  ),
                 ),
                 SpacingTokens.v64,
                 LoomiButton.primary(

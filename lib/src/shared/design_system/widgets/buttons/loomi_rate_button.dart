@@ -45,12 +45,12 @@ class LoomiRateButton extends StatelessWidget {
                     radius: 25,
                   ),
                   LoomiVerticalIconButton(
-                    icon: LoomiIcons.thumb_up,
+                    icon: LoomiIcons.thumbUp,
                     text: 'I Like it',
                     onPressed: onLikePressed,
                   ),
                   LoomiVerticalIconButton(
-                    icon: LoomiIcons.double_like,
+                    icon: LoomiIcons.doubleLike,
                     text: 'I love it!',
                     onPressed: onLoveItPressed,
                   ),
@@ -59,7 +59,7 @@ class LoomiRateButton extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     icon: const Icon(
-                      LoomiIcons.outline_close,
+                      LoomiIcons.outlineClose,
                       color: ColorTokens.purple,
                     ),
                   ),
@@ -76,7 +76,7 @@ class LoomiRateButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Icon(
-              LoomiIcons.thumb_up,
+              LoomiIcons.thumbUp,
               color: ColorTokens.white,
             ),
             SpacingTokens.v6,

@@ -32,16 +32,16 @@ class LoomiButtonColor {
     disabledForeground: ColorTokens.white_33,
     focusedBackground: ColorTokens.black,
     focusedForeround: ColorTokens.black,
-    foreground: ColorTokens.purple,
+    foreground: ColorTokens.cardTextColor,
   );
 
   static const LoomiButtonColor tertiary = LoomiButtonColor._(
-    ColorTokens.purple_20,
+    ColorTokens.black,
     disabledBackground: ColorTokens.white_33,
     disabledForeground: ColorTokens.white_33,
-    focusedBackground: ColorTokens.purple_20,
-    focusedForeround: ColorTokens.purple_20,
-    foreground: ColorTokens.purple_20,
+    focusedBackground: ColorTokens.black,
+    focusedForeround: ColorTokens.black,
+    foreground: ColorTokens.purple,
   );
 
   static const LoomiButtonColor quaternary = LoomiButtonColor._(

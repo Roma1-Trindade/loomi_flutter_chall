@@ -16,6 +16,13 @@ mixin _$AuthStore on _AuthStoreBase, Store {
       (_$isAuthenticatedComputed ??= Computed<bool>(() => super.isAuthenticated,
               name: '_AuthStoreBase.isAuthenticated'))
           .value;
+  Computed<String>? _$userNameComputed;
+
+  @override
+  String get userName =>
+      (_$userNameComputed ??= Computed<String>(() => super.userName,
+              name: '_AuthStoreBase.userName'))
+          .value;
 
   late final _$userAtom = Atom(name: '_AuthStoreBase.user', context: context);
 
@@ -61,6 +68,22 @@ mixin _$AuthStore on _AuthStoreBase, Store {
   set passwordText(String? value) {
     _$passwordTextAtom.reportWrite(value, super.passwordText, () {
       super.passwordText = value;
+    });
+  }
+
+  late final _$userNameTextAtom =
+      Atom(name: '_AuthStoreBase.userNameText', context: context);
+
+  @override
+  String? get userNameText {
+    _$userNameTextAtom.reportRead();
+    return super.userNameText;
+  }
+
+  @override
+  set userNameText(String? value) {
+    _$userNameTextAtom.reportWrite(value, super.userNameText, () {
+      super.userNameText = value;
     });
   }
 
@@ -145,6 +168,14 @@ mixin _$AuthStore on _AuthStoreBase, Store {
     return _$signInWithGoogleAsyncAction.run(() => super.signInWithGoogle());
   }
 
+  late final _$changeNameAsyncAction =
+      AsyncAction('_AuthStoreBase.changeName', context: context);
+
+  @override
+  Future<void> changeName({required String name}) {
+    return _$changeNameAsyncAction.run(() => super.changeName(name: name));
+  }
+
   late final _$signUpAsyncAction =
       AsyncAction('_AuthStoreBase.signUp', context: context);
 
@@ -162,6 +193,40 @@ mixin _$AuthStore on _AuthStoreBase, Store {
   Future<void> resetPassword({required String email}) {
     return _$resetPasswordAsyncAction
         .run(() => super.resetPassword(email: email));
+  }
+
+  late final _$deleteAccountAsyncAction =
+      AsyncAction('_AuthStoreBase.deleteAccount', context: context);
+
+  @override
+  Future<void> deleteAccount() {
+    return _$deleteAccountAsyncAction.run(() => super.deleteAccount());
+  }
+
+  late final _$changePasswordAsyncAction =
+      AsyncAction('_AuthStoreBase.changePassword', context: context);
+
+  @override
+  Future<void> changePassword({required String newPassword}) {
+    return _$changePasswordAsyncAction
+        .run(() => super.changePassword(newPassword: newPassword));
+  }
+
+  late final _$checkCurrentPasswordAsyncAction =
+      AsyncAction('_AuthStoreBase.checkCurrentPassword', context: context);
+
+  @override
+  Future<bool> checkCurrentPassword({required String currentPassword}) {
+    return _$checkCurrentPasswordAsyncAction.run(
+        () => super.checkCurrentPassword(currentPassword: currentPassword));
+  }
+
+  late final _$checkUserPhotoAsyncAction =
+      AsyncAction('_AuthStoreBase.checkUserPhoto', context: context);
+
+  @override
+  Future<String?> checkUserPhoto() {
+    return _$checkUserPhotoAsyncAction.run(() => super.checkUserPhoto());
   }
 
   late final _$signOutAsyncAction =
@@ -198,16 +263,29 @@ mixin _$AuthStore on _AuthStoreBase, Store {
   }
 
   @override
+  String setName(String name) {
+    final _$actionInfo = _$_AuthStoreBaseActionController.startAction(
+        name: '_AuthStoreBase.setName');
+    try {
+      return super.setName(name);
+    } finally {
+      _$_AuthStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 user: ${user},
 emailText: ${emailText},
 passwordText: ${passwordText},
+userNameText: ${userNameText},
 isLoading: ${isLoading},
 isSuccess: ${isSuccess},
 isFailure: ${isFailure},
 errorMessage: ${errorMessage},
-isAuthenticated: ${isAuthenticated}
+isAuthenticated: ${isAuthenticated},
+userName: ${userName}
     ''';
   }
 }

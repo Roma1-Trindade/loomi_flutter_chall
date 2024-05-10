@@ -44,6 +44,14 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<void> deleteAccount() async {
+    User? user = _firebaseAuth.currentUser;
+    if (user != null) {
+      user.delete();
+    }
+  }
+
+  @override
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
   }
