@@ -5,7 +5,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:loomi_flutter_chall/src/auth/presentation/stores/auth_store.dart';
-import 'package:loomi_flutter_chall/src/home/home_routes.dart';
+import 'package:loomi_flutter_chall/src/home/routes/home_route.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/assets/loomi_icons.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/assets/loomi_images.dart';
 import 'package:loomi_flutter_chall/src/shared/design_system/themes/loomi_text_style.dart';
