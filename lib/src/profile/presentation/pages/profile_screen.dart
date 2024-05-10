@@ -38,6 +38,7 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SpacingTokens.v12,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -47,13 +48,13 @@ class ProfileScreen extends StatelessWidget {
                       color: ColorTokens.purple,
                     ),
                     onTap: () {
-                      Navigator.of(context).pop();
+                      Navigator.pop(context);
                     },
                   ),
                   LoomiButton.tertiary(
                     text: 'Edit Profile',
                     onPressed: () {
-                      Navigator.of(context).push(EditProfileRoute());
+                      Navigator.push(context, EditProfileRoute());
                     },
                     hasBorder: true,
                     width: 120,
@@ -148,7 +149,7 @@ class ProfileScreen extends StatelessWidget {
                 text: 'Change Password',
                 icon: LoomiIcons.shield,
                 onPressed: () {
-                  Navigator.of(context).push(ChangePasswordRoute());
+                  Navigator.push(context, ChangePasswordRoute());
                 },
               ),
               SpacingTokens.v10,
@@ -206,7 +207,7 @@ class ProfileScreen extends StatelessWidget {
                                 text: 'Cancel',
                                 width: 150,
                                 onPressed: () {
-                                  Navigator.of(context).pop();
+                                  Navigator.pop(context);
                                 },
                               ),
                               LoomiButton.primary(
@@ -216,7 +217,7 @@ class ProfileScreen extends StatelessWidget {
                                 onPressed: () async {
                                   await authStore.deleteAccount();
                                   if (authStore.isSuccess) {
-                                    Navigator.of(context).pushAndRemoveUntil(
+                                    Navigator.pushAndRemoveUntil(context,
                                         SignUpRoute(), (route) => false);
                                   }
                                   if (authStore.isFailure) {

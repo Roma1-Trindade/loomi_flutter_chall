@@ -20,14 +20,14 @@ class SplashScreen extends StatelessWidget {
       body: Observer(builder: (_) {
         if (authStore.isAuthenticated) {
           Future.delayed(const Duration(seconds: 3), () {
-            Navigator.of(context).pushReplacement(HomeRoute());
+            Navigator.pushReplacement(context, HomeRoute());
           });
           return Center(
             child: SvgPicture.asset(LoomiImages.logo),
           );
         } else {
           Future.delayed(const Duration(seconds: 3), () {
-            Navigator.of(context).pushReplacement(SignUpRoute());
+            Navigator.pushReplacement(context, SignUpRoute());
           });
 
           return Center(

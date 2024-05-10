@@ -98,7 +98,7 @@ class SignInScreen extends StatelessWidget {
                               ),
                             ),
                             onTap: () {
-                              Navigator.of(context).push(ForgotPasswordRoute());
+                              Navigator.push(context, ForgotPasswordRoute());
                             },
                           ),
                         ],
@@ -114,7 +114,8 @@ class SignInScreen extends StatelessWidget {
                                 email: emailController.text,
                                 password: passwordController.text);
                             if (authStore.isSuccess) {
-                              Navigator.of(context).pushAndRemoveUntil(
+                              Navigator.pushAndRemoveUntil(
+                                context,
                                 HomeRoute(),
                                 (_) => false,
                               );
@@ -150,8 +151,8 @@ class SignInScreen extends StatelessWidget {
                               ),
                             ),
                             onTap: () {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  SignUpRoute(), (_) => false);
+                              Navigator.pushAndRemoveUntil(
+                                  context, SignUpRoute(), (_) => false);
                             },
                           ),
                         ],

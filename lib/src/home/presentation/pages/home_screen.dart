@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                               alignment: Alignment.centerRight,
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.of(context).push(ProfileRoute());
+                                  Navigator.push(context, ProfileRoute());
                                 },
                                 borderRadius: BorderRadius.circular(40),
                                 child: FutureBuilder(

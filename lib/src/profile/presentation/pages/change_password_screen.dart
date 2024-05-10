@@ -45,13 +45,14 @@ class ChangePasswordScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SpacingTokens.v22,
               GestureDetector(
                 child: const Icon(
                   Icons.arrow_back_ios_new,
                   color: ColorTokens.purple,
                 ),
                 onTap: () {
-                  Navigator.of(context).pop();
+                  Navigator.pop(context);
                 },
               ),
               SpacingTokens.v30,
@@ -114,7 +115,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           await authStore.changePassword(
                               newPassword: newPasswordController.text);
                           if (authStore.isSuccess) {
-                            Navigator.of(context).pop();
+                            Navigator.pop(context);
                           }
                           if (authStore.isFailure) {
                             LoomiNotification.showNotification(
