@@ -47,7 +47,8 @@ class SuccessResetPasswordScreen extends StatelessWidget {
               LoomiButton.primary(
                 text: 'Login',
                 onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
+                  Navigator.pushAndRemoveUntil(
+                    context,
                     SignInRoute(),
                     (_) => false,
                   );

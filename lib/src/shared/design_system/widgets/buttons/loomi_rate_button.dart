@@ -56,7 +56,7 @@ class LoomiRateButton extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Navigator.pop(context);
                     },
                     icon: const Icon(
                       LoomiIcons.outlineClose,

@@ -26,7 +26,8 @@ class LoomiSocialButtons extends StatelessWidget {
           onTap: () async {
             await authStore.signInWithGoogle();
             if (authStore.isSuccess) {
-              Navigator.of(context).pushAndRemoveUntil(
+              Navigator.pushAndRemoveUntil(
+                context,
                 HomeRoute(),
                 (_) => false,
               );

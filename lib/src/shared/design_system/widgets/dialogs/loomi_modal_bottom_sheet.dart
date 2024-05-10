@@ -35,7 +35,7 @@ class LoomiModalBottomSheet extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pop();
+                      Navigator.pop(context);
                     },
                     child: const Icon(
                       Icons.arrow_back_ios,

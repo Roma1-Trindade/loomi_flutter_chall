@@ -222,7 +222,8 @@ class SignUpProfileScreen extends StatelessWidget {
                       );
 
                       if (authStore.isSuccess) {
-                        Navigator.of(context).pushAndRemoveUntil(
+                        Navigator.pushAndRemoveUntil(
+                          context,
                           HomeRoute(),
                           (_) => false,
                         );
@@ -240,7 +241,7 @@ class SignUpProfileScreen extends StatelessWidget {
                 LoomiButton.secondary(
                   text: 'Back',
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.pop(context);
                   },
                 ),
               ],

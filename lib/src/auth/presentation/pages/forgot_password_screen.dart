@@ -80,7 +80,8 @@ class ForgotPasswordScreen extends StatelessWidget {
                               );
 
                               if (authStore.isSuccess) {
-                                Navigator.of(context).push(
+                                Navigator.push(
+                                  context,
                                   SuccessResetPasswordRoute(),
                                 );
                               }
@@ -98,7 +99,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                         LoomiButton.secondary(
                           text: 'Back',
                           onPressed: () {
-                            Navigator.of(context).pop();
+                            Navigator.pop(context);
                           },
                         ),
                       ],

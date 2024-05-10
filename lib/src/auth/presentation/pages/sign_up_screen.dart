@@ -72,7 +72,7 @@ class SignUpScreen extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          Navigator.of(context).push(SignInRoute());
+                          Navigator.push(context, SignInRoute());
                         },
                       ),
                     ],
@@ -144,7 +144,7 @@ class SignUpScreen extends StatelessWidget {
                       if (emailController.isValid &&
                           passwordController.isValid &&
                           confirmPasswordController.isValid) {
-                        Navigator.of(context).push(SignUpProfileRoute());
+                        Navigator.push(context, SignUpProfileRoute());
                       } else {
                         emailController.showValidationState();
                         passwordController.showValidationState();
