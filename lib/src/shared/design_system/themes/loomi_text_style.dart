@@ -21,6 +21,13 @@ class LoomiTextStyle {
       fontWeight: FontWeightTokens.extraBold,
     ),
   );
+  static LoomiTextStyle bold = const LoomiTextStyle._(
+    TextStyle(
+      fontFamily: LoomiTypographyTokens.EpilogueFamily,
+      fontSize: FontSizeTokens.hecto,
+      fontWeight: FontWeightTokens.bold,
+    ),
+  );
   static LoomiTextStyle headline1 = const LoomiTextStyle._(
     TextStyle(
       fontFamily: LoomiTypographyTokens.EpilogueFamily,

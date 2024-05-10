@@ -25,4 +25,14 @@ class LoomiIcons {
       IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData gallery =
       IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData thumb_up =
+      IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData send =
+      IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData outline_close =
+      IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData double_like =
+      IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData dislike =
+      IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
