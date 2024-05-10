@@ -25,6 +25,9 @@ abstract class _AuthStoreBase with Store {
   String? passwordText;
 
   @observable
+  String? userNameText;
+
+  @observable
   bool isLoading = false;
 
   @observable
@@ -43,6 +46,9 @@ abstract class _AuthStoreBase with Store {
   String setPassword(String password) => passwordText = password;
 
   @action
+  String setName(String name) => userNameText = name;
+
+  @action
   Future<void> signIn({required String email, required String password}) async {
     try {
       isLoading = true;
@@ -54,8 +60,9 @@ abstract class _AuthStoreBase with Store {
         password: password,
       );
       if (user != null) {
-        isSuccess = true;
+        userNameText = user!.displayName!;
         errorMessage = '';
+        isSuccess = true;
       }
     } catch (e) {
       e as FirebaseAuthException;
@@ -75,8 +82,9 @@ abstract class _AuthStoreBase with Store {
       errorMessage = '';
       user = await _authRepository.signInWithGoogle();
       if (user != null) {
-        isSuccess = true;
+        userNameText = user!.displayName!;
         errorMessage = '';
+        isSuccess = true;
       }
     } catch (e) {
       isFailure = true;
@@ -84,6 +92,29 @@ abstract class _AuthStoreBase with Store {
       print('[error]: $e');
     } finally {
       isLoading = false;
+    }
+  }
+
+  @action
+  Future<void> changeName({required String name}) async {
+    if (user != null) {
+      try {
+        isLoading = true;
+        isSuccess = false;
+        isFailure = false;
+        errorMessage = '';
+        await user?.updateDisplayName(name);
+        userNameText = name;
+        isSuccess = true;
+      } catch (e) {
+        e as FirebaseAuthException;
+        errorMessage = e.message;
+        isFailure = true;
+      } finally {
+        isLoading = false;
+      }
+    } else {
+      isFailure = true;
     }
   }
 
@@ -102,24 +133,11 @@ abstract class _AuthStoreBase with Store {
         email: email,
         password: password,
       );
-
-      if (user != null) {
-        try {
-          await user?.updateDisplayName(name);
-          isSuccess = true;
-          errorMessage = '';
-        } catch (e) {
-          e as FirebaseAuthException;
-          isFailure = true;
-          errorMessage = e.message;
-        }
-      } else {
-        isFailure = true;
-      }
+      await changeName(name: name);
     } catch (e) {
       e as FirebaseAuthException;
-      isFailure = true;
       errorMessage = e.message;
+      isFailure = true;
     } finally {
       isLoading = false;
     }
@@ -136,10 +154,84 @@ abstract class _AuthStoreBase with Store {
       isSuccess = true;
     } catch (e) {
       e as FirebaseAuthException;
-      isFailure = true;
       errorMessage = e.message;
+      isFailure = true;
     } finally {
       isLoading = false;
+    }
+  }
+
+  @action
+  Future<void> deleteAccount() async {
+    try {
+      isLoading = true;
+      isSuccess = false;
+      isFailure = false;
+      errorMessage = '';
+      await _authRepository.deleteAccount();
+      user = null;
+      userNameText = '';
+      isSuccess = true;
+    } catch (e) {
+      e as FirebaseAuthException;
+      errorMessage = e.message;
+      isFailure = true;
+    } finally {
+      isLoading = false;
+    }
+  }
+
+  @action
+  Future<void> changePassword({required String newPassword}) async {
+    if (user != null) {
+      try {
+        isLoading = true;
+        isSuccess = false;
+        isFailure = false;
+        errorMessage = '';
+        await user!.updatePassword(newPassword);
+        isSuccess = true;
+      } catch (e) {
+        e as FirebaseAuthException;
+        errorMessage = e.message;
+        isFailure = true;
+      } finally {
+        isLoading = false;
+      }
+    }
+  }
+
+  @action
+  Future<bool> checkCurrentPassword({required String currentPassword}) async {
+    if (user != null) {
+      try {
+        isLoading = true;
+        isSuccess = false;
+        isFailure = false;
+        errorMessage = '';
+        await _authRepository.signInWithEmailAndPassword(
+            email: user!.email!, password: currentPassword);
+        isSuccess = true;
+        return true;
+      } catch (e) {
+        e as FirebaseAuthException;
+        errorMessage = e.message;
+        isFailure = true;
+        return false;
+      } finally {
+        isLoading = false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  @action
+  Future<String?> checkUserPhoto() async {
+    if (user != null) {
+      return user?.photoURL;
+    } else {
+      return null;
     }
   }
 
@@ -152,11 +244,12 @@ abstract class _AuthStoreBase with Store {
       errorMessage = '';
       await _authRepository.signOut();
       user = null;
+      userNameText = '';
       isSuccess = true;
     } catch (e) {
       e as FirebaseAuthException;
-      isFailure = true;
       errorMessage = e.message;
+      isFailure = true;
     } finally {
       isLoading = false;
     }
@@ -164,6 +257,9 @@ abstract class _AuthStoreBase with Store {
 
   @computed
   bool get isAuthenticated => user != null;
+
+  @computed
+  String get userName => user != null ? user!.displayName! : '';
 
   void init() {
     user = _authRepository.getCurrentUser();

@@ -14,6 +14,13 @@ class LoomiTextStyle {
       letterSpacing: LetterSpacingTokens.zetta,
     ),
   );
+  static LoomiTextStyle semiBold = const LoomiTextStyle._(
+    TextStyle(
+      fontFamily: LoomiTypographyTokens.EpilogueFamily,
+      fontSize: FontSizeTokens.mega,
+      fontWeight: FontWeightTokens.semiBold,
+    ),
+  );
   static LoomiTextStyle extraBold = const LoomiTextStyle._(
     TextStyle(
       fontFamily: LoomiTypographyTokens.EpilogueFamily,

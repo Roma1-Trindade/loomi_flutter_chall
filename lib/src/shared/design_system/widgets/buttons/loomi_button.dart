@@ -22,22 +22,28 @@ class LoomiButton extends StatelessWidget {
   final bool hasBorder;
   final bool hasShadow;
   final double width;
-
-  const LoomiButton._(
-      {Key? key,
-      required LoomiButtonColor color,
-      this.text,
-      this.onPressed,
-      this.icon,
-      this.textColor,
-      this.isLoading = false,
-      this.padding,
-      this.textStyle,
-      required this.iconAffinity,
-      this.hasBorder = true,
-      this.hasShadow = true,
-      this.width = 200})
-      : _color = color,
+  final double _radius;
+  final double borderWidth;
+  final Color borderColor;
+  const LoomiButton._({
+    Key? key,
+    required LoomiButtonColor color,
+    this.text,
+    this.onPressed,
+    this.icon,
+    this.textColor,
+    this.isLoading = false,
+    this.padding,
+    this.textStyle,
+    required this.iconAffinity,
+    this.hasBorder = true,
+    this.hasShadow = true,
+    this.width = 200,
+    required double radius,
+    this.borderWidth = 1,
+    this.borderColor = ColorTokens.purple,
+  })  : _color = color,
+        _radius = radius,
         super(key: key);
 
   factory LoomiButton.primary({
@@ -53,6 +59,8 @@ class LoomiButton extends StatelessWidget {
     bool hasBorder = true,
     bool hasShadow = true,
     double width = 200,
+    double borderWidth = 1,
+    Color borderColor = ColorTokens.purple,
   }) =>
       LoomiButton._(
         key: key,
@@ -68,6 +76,8 @@ class LoomiButton extends StatelessWidget {
         hasBorder: hasBorder,
         hasShadow: hasShadow,
         width: width,
+        radius: 7,
+        borderWidth: borderWidth,
       );
 
   factory LoomiButton.secondary({
@@ -82,6 +92,7 @@ class LoomiButton extends StatelessWidget {
     TextStyle? textStyle,
     bool hasBorder = false,
     bool hasShadow = false,
+    double width = 200,
   }) =>
       LoomiButton._(
         key: key,
@@ -96,6 +107,42 @@ class LoomiButton extends StatelessWidget {
         textStyle: textStyle,
         hasBorder: hasBorder,
         hasShadow: hasShadow,
+        radius: 7,
+        width: width,
+      );
+  factory LoomiButton.tertiary({
+    Key? key,
+    String? text,
+    void Function()? onPressed,
+    bool isLoading = false,
+    Widget? icon,
+    IconAffinity iconAffinity = IconAffinity.trailing,
+    Color? textColor,
+    EdgeInsets? padding,
+    TextStyle? textStyle,
+    bool hasBorder = true,
+    bool hasShadow = false,
+    double width = 200,
+    double borderWidth = 1,
+    Color borderColor = ColorTokens.purple,
+  }) =>
+      LoomiButton._(
+        key: key,
+        color: LoomiButtonColor.tertiary,
+        text: text,
+        onPressed: onPressed,
+        isLoading: isLoading,
+        icon: icon,
+        textColor: textColor,
+        iconAffinity: iconAffinity,
+        padding: padding,
+        textStyle: textStyle,
+        hasBorder: hasBorder,
+        hasShadow: hasShadow,
+        radius: 21,
+        width: width,
+        borderWidth: borderWidth,
+        borderColor: borderColor,
       );
 
   @override
@@ -105,27 +152,28 @@ class LoomiButton extends StatelessWidget {
       decoration: BoxDecoration(
         border: hasBorder
             ? Border.all(
-                color: ColorTokens.purple,
-                width: 1,
+                color: borderColor,
+                width: borderWidth,
               )
             : null,
         boxShadow: hasShadow
             ? const [
                 BoxShadow(
                   color: ColorTokens.shadow,
-                  // spreadRadius: 8,
                   blurStyle: BlurStyle.outer,
                   blurRadius: 18,
                 )
               ]
             : null,
-        borderRadius: BorderRadius.circular(7),
+        borderRadius: BorderRadius.circular(_radius),
       ),
       child: ElevatedButton(
         style: context.elevatedButtonTheme.style?.copyWith(
           shape: MaterialStateProperty.resolveWith<RoundedRectangleBorder?>(
-              (states) => RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(7))),
+              (states) {
+            return RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(_radius));
+          }),
           shadowColor: MaterialStateProperty.resolveWith<Color>(
               (states) => ColorTokens.shadow),
           padding: MaterialStateProperty.resolveWith<EdgeInsets>((states) {

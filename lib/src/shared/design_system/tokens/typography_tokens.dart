@@ -14,6 +14,7 @@ class FontSizeTokens {
   static const double giga = 20;
   static const double s22 = 22;
   static const double tera = 24;
+  static const double s26 = 26;
   static const double peta = 28;
   static const double s32 = 32;
   static const double exa = 36;
